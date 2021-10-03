@@ -13,7 +13,7 @@
 	<link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
 	<link href="{% static 'saler/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
 	<link href="{% static 'saler/css/style.css' %}" rel="stylesheet">
-	<title>Wrappers India Online</title>
+	<title>Electronics Wolrd</title>
 
 	{% block saler_head %}
 	{% endblock saler_head %}
@@ -38,7 +38,7 @@
 			data-toggle="tooltip" data-placement="top" title="View My Products"><i class="fa fa-eye"
 				aria-hidden="true"></i></a>
 
-		<a href="##" data-container="body" data-toggle="popover" data-placement="right" data-trigger="focus"
+		<a href="#" data-container="body" data-toggle="popover" data-placement="right" data-trigger="focus"
 					data-html="true"
 					data-content="<a href='{% url 'saler_account_settings' %}'>Account Settings</a>" onmouseenter="document.getElementById('wallet').style.left = '-400px';" data-toggle="tooltip"
 			 title="User Profile"><i class="fa fa-user a" aria-hidden="true"></i></a>
@@ -55,39 +55,6 @@
 	<!-- menu -->
 	<nav id="menu" style="display: none; z-index: 98">
 		<ul>
-			<!--<li class="active">
-				 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Men's
-					Wear</a>
-				<ul class="collapse list-unstyled" id="homeSubmenu">
-					<li>
-						<a href="#">Lipistic</a>
-					</li>
-					<li>
-						<a href="#">Chappal</a>
-					</li>
-					<li>
-						<a href="#">Sandil</a>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<a href="#">Foodwear</a>
-			</li>
-			<li>
-				<a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Women's
-					Wear</a>
-				<ul class="collapse list-unstyled" id="pageSubmenu">
-					<li>
-						<a href="#">Lipistic</a>
-					</li>
-					<li>
-						<a href="#">Chappal</a>
-					</li>
-					<li>
-						<a href="#">Pata na ka</a>
-					</li>
-				</ul>
-			</li>-->
 			<li>
 				<a href="/contact">Contact Us</a>
 			</li> 
@@ -107,7 +74,7 @@
 	</nav>
 
 	<!-- wallet -->
-	<div align="center" style="align-items: center; margin: 0; padding: 0; display: inline;">
+	<div style="align-items: center; margin: 0; padding: 0; display: inline;">
 		<ul class="wallet" id="wallet" style="z-index: 98;">
 			<li class="p-1">
 				<a href="{% url 'cart' %}"><i class="fa fa-shopping-cart" aria-hidden="true"
@@ -117,9 +84,6 @@
 			<li class="p-1">
 				<a href="{% url 'seller_orders' %}"><i class="fa fa-archive" aria-hidden="true" style="display: block;"></i>My Orders</a>
 			</li>
-			<!-- <li class="p-1">
-				<a href="#"><i class="fa fa-history" aria-hidden="true" style="display: block;"></i>History</a>
-			</li> -->
 		</ul>
 	</div>
 	<!-- user -->

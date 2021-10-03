@@ -45,7 +45,6 @@
 <script>
   function ValidateEmail(mail) {
     var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    // if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(myForm.emailAddr.value))
     if (mail.match(mailformat)) {
       document.getElementById('usrerr').innerText = "";
       document.getElementById('disbtn1').disabled = false;
