@@ -15,8 +15,24 @@
 <div class="container-fluid">
 	<h3 style="text-align: center;">Your Orders</h3>
 	<div style="text-align: center;" class="pb-1">
-	<a href="#" style="text-align: center;" class="btn btn-success" onclick="document.getElementById('odrs').style.display='block'; document.getElementById('dodrs').style.display='none';">View Orders</a>
-	<a href="#" style="text-align: center;" class="btn btn-success" onclick="document.getElementById('odrs').style.display='none'; document.getElementById('dodrs').style.display='block';">View All Delivered Products</a>
+		<a href="#" style="text-align: center;" class="btn btn-success" onclick="document.getElementById('odrs').style.display='block';
+		  document.getElementById('dodrs').style.display='none'; document.getElementById('podrs').style.display='none';
+		  document.getElementById('oodrs').style.display='none';">View Orders</a>
+	
+		<a href="#" style="text-align: center;" class="btn btn-success" onclick="document.getElementById('odrs').style.display='none';
+	   document.getElementById('dodrs').style.display='none'; document.getElementById('oodrs').style.display='none';
+		document.getElementById('podrs').style.display='block';"> Packed Orders</a>
+		
+		<a href="#" style="text-align: center;" class="btn btn-success" onclick="document.getElementById('odrs').style.display='none';
+		document.getElementById('podrs').style.display='none';
+		 document.getElementById('dodrs').style.display='none'; document.getElementById('oodrs').style.display='block';"> On The Way</a>
+	
+		<a href="#" style="text-align: center;" class="btn btn-success" onclick="document.getElementById('odrs').style.display='none'; 
+		  document.getElementById('dodrs').style.display='block'; document.getElementById('podrs').style.display='none';
+		  document.getElementById('oodrs').style.display='none';">Delivered Orders</a>
+
+  
+	  
 	</div>
 	<div id="odrs">
 	{% for ord in orders %}
@@ -37,10 +53,10 @@
 	        <p class="card-text m-0">Product Name: {{item|product:'|'|slice:'0:1'|remfl:'2'}}</p>
 	        {% endif %}
 	      	{% endfor %}
-	        <p class="card-text m-0"><b>size: {{ord.size}}</b> <b style="float: right;">Quantity: {{ord.size}}</b></p>
+	        <p class="card-text m-0"><b>size: {{ord.size}}</b> <b style="float: right;">Quantity: {{ord.number}}</b></p>
 	         {% for item in ord.products|split:',' %}
 	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
-	        <p class="card-text"><small class="text-muted">Price: <i class="fa fa-inr" aria-hidden="true"></i>{{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
+	        <p class="card-text"><small class="text-muted">Price: Kshs {{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
 	         {% endif %}
 	      	{% endfor %}
 	        <div style="float: right;">
@@ -52,14 +68,22 @@
 		        </form>
 				{% endif %}
 
-		        {% if ord.status != 'Packed' and ord.status != 'Delivered' %}
+		        {% if ord.status != 'Packed' and ord.status != 'On the way'  and ord.status != 'Delivered' %}
 		        <form style="display: inline;">
 					<input type="text" name="odrr" value="{{ord.order_id}}" style="display: none;">
 					<input type="text" name="st" value="Packed" style="display: none;">
 					<button type="submit" class="btn btn-outline-success">Packed</button>
 				</form>
 				{% endif %}
-		        {% if ord.status != 'Delivered' %}
+		        {% if ord.status != 'On the way' and ord.status != 'Delivered' %}
+				<form style="display: inline;">
+				<input type="text" name="odrr" value="{{ord.order_id}}" style="display: none;"/>
+				<input type="text" name="st" value="On the way" style="display: none;"/>
+				<button type="submit" class="btn btn-outline-warning">On the way</button>
+				</form>
+
+				{% endif %}
+				{% if ord.status != 'Delivered' %}
 		        <form style="display: inline;">
 					<input type="text" name="odrr" value="{{ord.order_id}}" style="display: none;">
 					<input type="text" name="st" value="Delivered" style="display: none;">
@@ -97,13 +121,106 @@
 	        <p class="card-text m-0">Product Name: {{item|product:'|'|slice:'0:1'|remfl:'2'}}</p>
 	        {% endif %}
 	      	{% endfor %}
-	        <p class="card-text m-0"><b>size: {{ord.size}}</b> <b style="float: right;">Quantity: {{ord.size}}</b></p>
+	        <p class="card-text m-0"><b>size: {{ord.size}}</b> <b style="float: right;">Quantity: {{ord.number}}</b></p>
 	         {% for item in ord.products|split:',' %}
 	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
-	        <p class="card-text"><small class="text-muted">Price: <i class="fa fa-inr" aria-hidden="true"></i>{{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
+	        <p class="card-text"><small class="text-muted">Price: Kshs {{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
 	         {% endif %}
 	      	{% endfor %}
 	            </div>
+	    </div>
+	  </div>
+	</div>
+	{% endfor %}
+	</div>
+	<div id="oodrs" style="display: none;">
+		{% for ord in oorders %}
+	<div class="card mb-3" >
+	  <div class="row no-gutters">
+	    <div class="col-md-4">
+	    	 {% for item in ord.products|split:',' %}
+	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
+	      <img src="{{item|product:'|'|slice:'1:2'|remfl:'2'}}" class="card-img" alt="..." style="max-height: 200px; width: auto;">
+	      	{% endif %}
+	      	{% endfor %}
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body">
+	        <h5 class="card-title">Order Id : <strong>{{ord.order_id}}</strong></h5>
+	        {% for item in ord.products|split:',' %}
+	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
+	        <p class="card-text m-0">Product Name: {{item|product:'|'|slice:'0:1'|remfl:'2'}}</p>
+	        {% endif %}
+	      	{% endfor %}
+	        <p class="card-text m-0"><b>size: {{ord.size}}</b> <b style="float: right;">Quantity: {{ord.size}}</b></p>
+	         {% for item in ord.products|split:',' %}
+	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
+	        <p class="card-text"><small class="text-muted">Price: Kshs {{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
+	         {% endif %}
+	      	{% endfor %}
+	            </div>
+				<div style="float: right;">
+
+				{% if ord.status != 'Delivered' %}
+		        <form style="display: inline;">
+					<input type="text" name="odrr" value="{{ord.order_id}}" style="display: none;">
+					<input type="text" name="st" value="Delivered" style="display: none;">
+					<button type="submit" class="btn btn-outline-warning">Delivered</button>
+				</form>
+				{% endif %}
+				</div>
+	    </div>
+	  </div>
+	</div>
+	{% endfor %}
+	</div>
+	<div id="podrs" style="display: none;">
+		{% for ord in porders %}
+	<div class="card mb-3" >
+	  <div class="row no-gutters">
+	    <div class="col-md-4">
+	    	 {% for item in ord.products|split:',' %}
+	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
+	      <img src="{{item|product:'|'|slice:'1:2'|remfl:'2'}}" class="card-img" alt="..." style="max-height: 200px; width: auto;">
+	      	{% endif %}
+	      	{% endfor %}
+	    </div>
+	    <div class="col-md-8">
+	      <div class="card-body">
+	        <h5 class="card-title">Order Id : <strong>{{ord.order_id}}</strong></h5>
+	        {% for item in ord.products|split:',' %}
+	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
+	        <p class="card-text m-0">Product Name: {{item|product:'|'|slice:'0:1'|remfl:'2'}}</p>
+	        {% endif %}
+	      	{% endfor %}
+	        <p class="card-text m-0"><b>size: {{ord.size}}</b> <b style="float: right;">Quantity: {{ord.size}}</b></p>
+	         {% for item in ord.products|split:',' %}
+	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
+	        <p class="card-text"><small class="text-muted">Price: Kshs {{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
+	         {% endif %}
+	      	{% endfor %}
+	            </div>
+		
+                <div style="float: right;">
+				{% if ord.status != 'On the way' and ord.status != 'Delivered' %}
+				<form style="display: inline;">
+				<input type="text" name="odrr" value="{{ord.order_id}}" style="display: none;"/>
+				<input type="text" name="st" value="On the way" style="display: none;"/>
+				<button type="submit" class="btn btn-outline-warning">On the way</button>
+				</form>
+
+				{% endif %}
+
+				{% if ord.status != 'Delivered' %}
+		        <form style="display: inline;">
+					<input type="text" name="odrr" value="{{ord.order_id}}" style="display: none;">
+					<input type="text" name="st" value="Delivered" style="display: none;">
+					<button type="submit" class="btn btn-outline-warning">Delivered</button>
+				</form>
+				{% endif %}
+			</div>
+
+				
 	    </div>
 	  </div>
 	</div>

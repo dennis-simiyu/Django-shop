@@ -117,10 +117,10 @@
         },
         success: function (data) {
           $('#cart_no').text(data.len);
-          document.getElementById('subtotal').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.subtotal}`;
-          document.getElementById('total').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.total}`;
-          document.getElementById('tax').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.tax}`;
-          document.getElementById('delev').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.delev}`;
+          document.getElementById('subtotal').innerHTML = `kshs ${data.subtotal}`;
+          document.getElementById('total').innerHTML = `kshs ${data.total}`;
+          document.getElementById('tax').innerHTML = `kshs ${data.tax}`;
+          document.getElementById('delev').innerHTML = `kshs ${data.delev}`;
           document.getElementById(catid).parentNode.parentNode.parentNode.removeChild(document.getElementById(catid).parentNode.parentNode);
 
         }
@@ -143,10 +143,10 @@
         },
         success: function (data) {
           eml.innerText = data.num;
-          document.getElementById('subtotal').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.subtotal}`;
-          document.getElementById('total').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.total}`;
-          document.getElementById('tax').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.tax}`;
-          document.getElementById('delev').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.delev}`;
+          document.getElementById('subtotal').innerHTML = `kshs ${data.subtotal}`;
+          document.getElementById('total').innerHTML = `kshs ${data.total}`;
+          document.getElementById('tax').innerHTML = `kshs ${data.tax}`;
+          document.getElementById('delev').innerHTML = `kshs ${data.delev}`;
         }
       })
   });
@@ -168,10 +168,10 @@
         },
         success: function (data) {
           eml.innerText = data.num;
-          document.getElementById('subtotal').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.subtotal}`;
-          document.getElementById('total').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.total}`;
-          document.getElementById('tax').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.tax}`;
-          document.getElementById('delev').innerHTML = `<i class="fa fa-inr" aria-hidden="true"></i>${data.delev}`;
+          document.getElementById('subtotal').innerHTML = `kshs ${data.subtotal}`;
+          document.getElementById('total').innerHTML = `kshs ${data.total}`;
+          document.getElementById('tax').innerHTML = `kshs ${data.tax}`;
+          document.getElementById('delev').innerHTML = `kshs ${data.delev}`;
         }
       })
   });

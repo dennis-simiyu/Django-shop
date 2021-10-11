@@ -220,9 +220,7 @@ $.fn.preload = function() {
 						<h3 class="product-title">{{product.product_name}}</h3>
 
 						<p class="product-description">{{product.desc}}</p>
-						<h4 class="price"><p><span class="item_price"><span><i class="fa fa-inr"
-											aria-hidden="true"></i></span>{{product.price}}</span> <del><i class="fa fa-inr"
-											aria-hidden="true"></i>{{product.price_not}}</del></p></h4>
+						<h4 class="price"><p><span class="item_price"><span>kshs </span>{{product.price}}</span> <del>kshs {{product.price_not}}</del></p></h4>
             {% if sizes %}
 						<h5 class="sizes">sizes:
               {% for me in sizes %}

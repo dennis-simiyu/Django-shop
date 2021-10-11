@@ -251,10 +251,11 @@ class MyCart(models.Model):
 	number = models.PositiveIntegerField(default=0)
 
 class Orders(models.Model):
-	STATUS_CHOICES = (("Accepted",'Accepted'),("Packed",'Packed'),("On The Way",'On The Way'),("Delivered",'Delivered'),("Cancel",'Cancel'))
+	STATUS_CHOICES = (("Accepted",'Accepted'),("Packed",'Packed'),("On the way",'On the way'),("Delivered",'Delivered'),("Cancel",'Cancel'),("Returned",'Returned'))
 	order_id = models.CharField(max_length=50,default='')
 	saler = models.CharField(max_length=100,default='wrappers@admin',)
 	user = models.ForeignKey(User, default='', on_delete=models.CASCADE)
 	products = models.CharField(max_length=50)
 	size = models.CharField(max_length=50,default='',null=True)
+	number = models.IntegerField(default = 1)
 	status = models.CharField(max_length=15,choices=STATUS_CHOICES,default='')

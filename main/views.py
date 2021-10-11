@@ -233,7 +233,7 @@ def add_to_cart(request):
 
 @login_required
 def plus_element_cart(request):
-	if request.method == 'GET':
+	if  request.method == 'GET':
 		prod_id = request.GET['prod_id']
 		c = Cart.objects.get(id=prod_id)
 		c.number+=1
@@ -260,7 +260,7 @@ def plus_element_cart(request):
 
 @login_required
 def minus_element_cart(request):
-	if request.method == 'GET':
+	if  request.method == 'GET':
 		prod_id = request.GET['prod_id']
 		c = Cart.objects.get(id=prod_id)
 		c.number-=1
@@ -366,18 +366,11 @@ def order_now(request):
 	
 				param_dict = {
 
-		                'MID': 'YOUR_MID',
-		                'ORDER_ID': str(o_id),
-		                'TXN_AMOUNT': str(subtotal+tax+delev),
-		                'CUST_ID': request.user.username,
-		                'INDUSTRY_TYPE_ID': 'Retail',
-		                'WEBSITE': 'WEBSTAGING',
-		                'CHANNEL_ID': 'WEB',
-		                'CALLBACK_URL':'http://127.0.0.1:8000/handlerequest/',
+		                
 
 		        }
-				param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
-				return render(request, 'main/paytm.html', {'param_dict': param_dict})
+				##param_dict['CHECKSUMHASH'] = Checksum.generate_checksum(param_dict, MERCHANT_KEY)
+				return render(request, 'main/checkout2.html', {'param_dict': param_dict})
 
 	else:
 		address_form = UserAddressForm(instance=request.user.userdetail)

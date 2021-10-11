@@ -53,6 +53,10 @@ def dashboard(request):
 				o = Orders.objects.filter(order_id=odrr).first()
 				o.status = 'Packed'
 				o.save()
+			if st == 'On the way':
+				o = Orders.objects.filter(order_id=odrr).first()
+				o.status = 'On the way'
+				o.save()
 			if st == 'Delivered':
 				o = Orders.objects.filter(order_id=odrr).first()
 				o.status = 'Delivered'
@@ -60,7 +64,9 @@ def dashboard(request):
 		ordr = [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status != 'On The Way' and i.status != 'Delivered'][::-1]
 		params = {
 				'orders':ordr,
-				'dorders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'On The Way' or i.status == 'Delivered'][::-1],
+				'porders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'Packed'][::-1],
+				'oorders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'On the way'][::-1],
+				'dorders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'Delivered'][::-1],
 				'cart_element_no' : len([p for p in MyCart.objects.all() if p.user == request.user]),
 				}
 		return render(request, 'saler/dashboard.html', params)
@@ -270,6 +276,8 @@ def MyOrders(request):
 
 	}
 	return render(request,'saler/myorders.html', params)
+
+
 
 # for adding a new product by seller 
 @login_required
