@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.models import User
 from .forms import SalerRegisterForm, SalerAddressForm, UpdateSalerDetailForm, UpdateSalerAccountDetailForm
 from main.forms import UserUpdateForm
+from main.models import UserDetail
 from django.contrib.auth.decorators import login_required
 from math import ceil
 from django.contrib.auth import update_session_auth_hash
@@ -62,6 +63,7 @@ def dashboard(request):
 				o.status = 'Delivered'
 				o.save()
 		ordr = [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status != 'On The Way' and i.status != 'Delivered'][::-1]
+		
 		params = {
 				'orders':ordr,
 				'porders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'Packed'][::-1],
@@ -72,6 +74,12 @@ def dashboard(request):
 		return render(request, 'saler/dashboard.html', params)
 	else:
 		return redirect("/")
+
+#This is to view the delivery address
+@login_required
+def delivery_address(request):
+    	pass
+    	
 
 # This is add to cart view of Seller means Whole Sale Products
 @login_required
@@ -446,10 +454,10 @@ def account_settings(request):
 # This is a part of admin view in which all ordered products will display with address
 def admin2(request):
 	if request.user.is_superuser:
-		ordr = [i for i in Orders.objects.all() if i.status != 'Cancel' and i.status != 'On The Way' and i.status != 'Delivered'][::-1]
+		ordr = [i for i in Orders.objects.all() if i.status != 'Cancel' and i.status != 'On the way' and i.status != 'Delivered'][::-1]
 		params = {
 				'orders':ordr,
-				'dorders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'On The Way' or i.status == 'Delivered'],
+				'dorders': [i for i in Orders.objects.filter(saler=request.user) if i.status != 'Cancel' and i.status == 'On the way' or i.status == 'Delivered'],
 				'cart_element_no' : len([p for p in MyCart.objects.all() if p.user == request.user]),
 				}
 		return render(request, 'saler/admin2.html', params)

@@ -103,10 +103,12 @@
 	{% endfor %}
 	</div>
 	<div id="dodrs" style="display: none;">
+		
 		{% for ord in dorders %}
 	<div class="card mb-3" >
 	  <div class="row no-gutters">
 	    <div class="col-md-4">
+			<p>{{ord.user.userdetail.locality}}</p>
 	    	 {% for item in ord.products|split:',' %}
 	        {% if item|product:'|'|slice:'0:1'|remfl:'2'%}
 	      <img src="{{item|product:'|'|slice:'1:2'|remfl:'2'}}" class="card-img" alt="..." style="max-height: 200px; width: auto;">
@@ -127,6 +129,7 @@
 	        <p class="card-text"><small class="text-muted">Price: Kshs {{item|product:'|'|slice:'2:3'|remfl:'1'}}</small></p>
 	         {% endif %}
 	      	{% endfor %}
+			  
 	            </div>
 	    </div>
 	  </div>
