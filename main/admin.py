@@ -1,6 +1,7 @@
 from django.contrib import admin
 from .models import UserDetail, Slider, Contact, Cart
 from saler.models import Product, ProductSize, SalerDetail, category, dow, SellerSlider, MyCart, WholeSaleProduct, Orders, trend,WholeSaleProductOrders
+from mpesa.models import MpesaPayment
 
 admin.site.site_header = 'Wrappers'
 
@@ -19,3 +20,4 @@ admin.site.register(WholeSaleProductOrders)
 admin.site.register(Cart)
 admin.site.register(Orders)
 admin.site.register(trend)
+admin.site.register(MpesaPayment)

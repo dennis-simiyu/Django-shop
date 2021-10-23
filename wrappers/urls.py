@@ -9,6 +9,7 @@ urlpatterns = [
     path('admin/home', admin.site.urls),
     path('admin/', admin2, name = 'admin2'),
     path('', include('main.urls')),
+    #path('api/v1/', include('mpesa.urls')),
     path('seller/', include('saler.urls')),
     path("login/", auth_views.LoginView.as_view(template_name='main/login.html', redirect_authenticated_user=True), name="login"),
     path("logout/", auth_views.LogoutView.as_view(next_page='login'), name="logout"),

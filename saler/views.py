@@ -14,7 +14,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 #This is view of Index Page of Seller in which we Display Whole Sale Products
 @login_required
 def index(request):
-	if request.user.is_superuser or request.user.is_staff:
+	if  request.user.is_superuser or request.user.is_staff:
 		allProds = []
 		catprods = WholeSaleProduct.objects.values('category', 'product_id')
 		cats = {item['category'] for item in catprods}

@@ -3,20 +3,21 @@ from django.http import HttpResponse, JsonResponse
 import requests
 from requests.auth import HTTPBasicAuth
 import json
-from . mpesa_credentials import MpesaAccessToken, LipanaMpesaPpassword
+#from . mpesa_credentials import MpesaAccessToken, LipanaMpesaPpassword
 from django.views.decorators.csrf import csrf_exempt
 from .models import MpesaPayment
+"""
 def getAccessToken(request):
-    consumer_key = 'vk1EroujdWDlSUF6p9uJjkybnBhCgTck'
-    consumer_secret = 'wsHbuOk64Fx172l4'
-    api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
+    consumer_key = 'ap0nHtDG8AiClQQ2uGDYGDxZENspo2oU'
+    consumer_secret = 'o6TMJFShmcz1EXGv'
+    #api_URL = 'https://sandbox.safaricom.co.ke/oauth/v1/generate?grant_type=client_credentials'
     r = requests.get(api_URL, auth=HTTPBasicAuth(consumer_key, consumer_secret))
     mpesa_access_token = json.loads(r.text)
     validated_mpesa_access_token = mpesa_access_token['access_token']
     return HttpResponse(validated_mpesa_access_token)
 def lipa_na_mpesa_online(request):
     access_token = MpesaAccessToken.validated_mpesa_access_token
-    api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
+    #api_url = "https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest"
     headers = {"Authorization": "Bearer %s" % access_token}
     request = {
         "BusinessShortCode": LipanaMpesaPpassword.Business_short_code,
@@ -27,22 +28,24 @@ def lipa_na_mpesa_online(request):
         "PartyA": 254799688638,  # replace with your phone number to get stk push
         "PartyB": LipanaMpesaPpassword.Business_short_code,
         "PhoneNumber": 254799688638,  # replace with your phone number to get stk push
-        "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
-        "AccountReference": "Henry",
+       # "CallBackURL": "https://sandbox.safaricom.co.ke/mpesa/",
+        "AccountReference": "Dennis",
         "TransactionDesc": "Testing stk push"
     }
-    response = requests.post(api_url, json=request, headers=headers)
+    #response = requests.post(api_url, json=request, headers=headers)
     return HttpResponse('success')
 @csrf_exempt
 def register_urls(request):
     access_token = MpesaAccessToken.validated_mpesa_access_token
     api_url = "https://sandbox.safaricom.co.ke/mpesa/c2b/v1/registerurl"
     headers = {"Authorization": "Bearer %s" % access_token}
-    options = {"ShortCode": LipanaMpesaPpassword.Business_short_code,
+    options = {
+               "ShortCode":'600247',
                "ResponseType": "Completed",
-               "ConfirmationURL": "http://127.0.0.1:8000/api/v1/c2b/confirmation",
-               "ValidationURL": "http://127.0.0.1:8000/api/v1/c2b/validation"}
-    response = requests.post(api_url, json=options, headers=headers)
+               "ConfirmationURL": "https://unlucky-termite-58.loca.lt/api/v1/c2b/confirmation",
+               "ValidationURL": "https://unlucky-termite-58.loca.lt/api/v1/c2b/validation"
+               }
+    #response = requests.post(api_url, json=options, headers=headers)
     return HttpResponse(response.text)
 @csrf_exempt
 def call_back(request):
@@ -75,3 +78,4 @@ def confirmation(request):
         "ResultDesc": "Accepted"
     }
     return JsonResponse(dict(context))
+    """
