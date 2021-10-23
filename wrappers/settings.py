@@ -13,14 +13,14 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import environ
 import os
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
+#env = environ.Env(
+ #   DEBUG=(bool, False)
+#)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-environ.Env.read_env()
+#environ.Env.read_env()
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +28,7 @@ environ.Env.read_env()
 DEBUG = True
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY=env('SECRET_KEY')
+SECRET_KEY='$a^w$eh7g*&@dt%hfv7qu*a87u(b3$(5ng(f@bj@%9a*2_z+te'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -145,6 +145,6 @@ LOGIN_REDIRECT_URL = 'home'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = env('EMAIL_ADRESS') 
-EMAIL_HOST_PASSWORD = env('EMAIL_PASSWORD')
+EMAIL_HOST_USER ='simiyudennis142@gmail.co' 
+EMAIL_HOST_PASSWORD = 'vision2022'
 EMAIL_USE_TLS = True
